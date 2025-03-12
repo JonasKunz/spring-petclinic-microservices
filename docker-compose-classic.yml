@@ -3,8 +3,8 @@ services:
     image: springcommunity/spring-petclinic-config-server
     container_name: config-server
     environment:
-      - OTEL_SERVICE_NAME=config-server
-    env_file: "edot-agent.env"
+      - ELASTIC_APM_SERVICE_NAME=config-server-classic
+    env_file: "classic-agent.env"
     volumes:
     - ./agents:/agents
     deploy:
@@ -22,7 +22,9 @@ services:
   discovery-server:
     image: springcommunity/spring-petclinic-discovery-server
     container_name: discovery-server
-    env_file: "edot-agent.env"
+    env_file: "classic-agent.env"
+    environment:
+      - ELASTIC_APM_SERVICE_NAME=discovery-server-classic
     volumes:
     - ./agents:/agents
     deploy:
@@ -43,7 +45,9 @@ services:
   customers-service:
     image: springcommunity/spring-petclinic-customers-service
     container_name: customers-service
-    env_file: "edot-agent.env"
+    env_file: "classic-agent.env"
+    environment:
+      - ELASTIC_APM_SERVICE_NAME=customers-service-classic
     volumes:
       - ./agents:/agents
     deploy:
@@ -61,7 +65,9 @@ services:
   visits-service:
     image: springcommunity/spring-petclinic-visits-service
     container_name: visits-service
-    env_file: "edot-agent.env"
+    env_file: "classic-agent.env"
+    environment:
+      - ELASTIC_APM_SERVICE_NAME=visits-service-classic
     volumes:
       - ./agents:/agents
     deploy:
@@ -79,7 +85,9 @@ services:
   vets-service:
     image: springcommunity/spring-petclinic-vets-service
     container_name: vets-service
-    env_file: "edot-agent.env"
+    env_file: "classic-agent.env"
+    environment:
+      - ELASTIC_APM_SERVICE_NAME=vets-service-classic
     volumes:
       - ./agents:/agents
     deploy:
@@ -98,10 +106,11 @@ services:
   genai-service:
     image: springcommunity/spring-petclinic-genai-service
     container_name: genai-service
-    env_file: "edot-agent.env"
+    env_file: "classic-agent.env"
     volumes:
     - ./agents:/agents
     environment:
+      - ELASTIC_APM_SERVICE_NAME=genai-service-classic
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - AZURE_OPENAI_KEY=${AZURE_OPENAI_KEY}
       - AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT}
@@ -121,7 +130,9 @@ services:
   api-gateway:
     image: springcommunity/spring-petclinic-api-gateway
     container_name: api-gateway
-    env_file: "edot-agent.env"
+    env_file: "classic-agent.env"
+    environment:
+      - ELASTIC_APM_SERVICE_NAME=api-gateway-classic
     volumes:
     - ./agents:/agents
     deploy:
@@ -139,7 +150,9 @@ services:
   admin-server:
     image: springcommunity/spring-petclinic-admin-server
     container_name: admin-server
-    env_file: "edot-agent.env"
+    env_file: "classic-agent.env"
+    environment:
+      - ELASTIC_APM_SERVICE_NAME=admin-server-classic
     volumes:
     - ./agents:/agents
     deploy:
