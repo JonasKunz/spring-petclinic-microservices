@@ -44,6 +44,9 @@ class VetResource {
     @GetMapping
     @Cacheable("vets")
     public List<Vet> showResourcesVetList() {
+        if (Math.random() < 0.1) {
+            throw new IllegalStateException("Unfortunately this service has run into an intentional demo error");
+        }
         return vetRepository.findAll();
     }
 }
